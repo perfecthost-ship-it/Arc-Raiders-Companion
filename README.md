@@ -1,4 +1,3 @@
-
 # ARC Companion
 
 A blueprint tracking and reference companion for **ARC Raiders**, built two ways: a **web app** you can use in any browser, and an optional **physical desktop device** (Arduino Uno R3 + 12" display) that mirrors the same data on hardware you can keep next to your monitor.
