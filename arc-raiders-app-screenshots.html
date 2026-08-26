@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ARC Companion - App Screenshots</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
+      background: #1a1a1a;
+      color: #e0e0e0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      color: #fff;
+      text-shadow: 0 0 20px rgba(100, 165, 255, 0.5);
+    }
+    
+    .screenshots {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .screenshot {
+      background: linear-gradient(135deg, #0b1220 0%, #131c2f 100%);
+      border: 2px solid #2a3548;
+      border-radius: 12px;
+      padding: 15px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    }
+    
+    .screenshot-title {
+      font-size: 1.3em;
+      font-weight: bold;
+      margin-bottom: 15px;
+      color: #60a5fa;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #2a3548;
+      padding-bottom: 10px;
+    }
+    
+    .phone-frame {
+      background: #000;
+      border: 8px solid #1a1a1a;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 9/16;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .phone-notch {
+      height: 25px;
+      background: #000;
+      border-bottom: 1px solid #2a3548;
+    }
+    
+    .phone-content {
+      flex: 1;
+      overflow-y: auto;
+      background: #0b1220;
+      padding: 15px;
+      font-size: 13px;
+    }
+    
+    .blueprint-card {
+      background: #131c2f;
+      border: 1px solid #2a3548;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .blueprint-card:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 0 12px rgba(59, 130, 246, 0.2);
+    }
+    
+    .blueprint-name {
+      font-weight: bold;
+      color: #e6eaf2;
+      margin-bottom: 5px;
+    }
+    
+    .blueprint-meta {
+      color: #7b8aa3;
+      font-size: 12px;
+    }
+    
+    .rarity-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 3px;
+      font-size: 11px;
+      margin-right: 5px;
+    }
+    
+    .rarity-common { background: #566375; color: #aebcd1; }
+    .rarity-uncommon { background: #0e7490; color: #cffafe; }
+    .rarity-rare { background: #1d4ed8; color: #dbeafe; }
+    .rarity-epic { background: #6d28d9; color: #ede9fe; }
+    .rarity-legendary { background: #b91c1c; color: #fee2e2; }
+    
+    .status-badge {
+      display: inline-block;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      margin-top: 5px;
+      background: #1e3a8a40;
+      color: #60a5fa;
+      border: 1px solid #3b82f680;
+    }
+    
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #1c2538;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 8px 0;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #60a5fa, #f87171);
+      transition: width 0.3s;
+    }
+    
+    .tabs {
+      display: flex;
+      gap: 5px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #2a3548;
+    }
+    
+    .tab {
+      flex: 1;
+      padding: 8px;
+      background: #0f1729;
+      border: 1px solid #2a3548;
+      border-bottom: none;
+      border-radius: 6px 6px 0 0;
+      cursor: pointer;
+      font-size: 12px;
+      text-align: center;
+      color: #7b8aa3;
+      transition: all 0.3s;
+    }
+    
+    .tab.active {
+      background: #131c2f;
+      color: #60a5fa;
+      border-color: #3b82f680;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #1c2538;
+      color: #aebcd1;
+    }
+    
+    .stat-value {
+      font-weight: bold;
+      color: #e6eaf2;
+    }
+    
+    .map-condition {
+      background: #1e3a8a40;
+      border: 1px solid #3b82f680;
+      border-radius: 6px;
+      padding: 10px;
+      margin-bottom: 8px;
+      color: #aebcd1;
+    }
+    
+    .description {
+      margin-top: 10px;
+      padding: 10px;
+      background: rgba(96, 165, 255, 0.1);
+      border-left: 3px solid #60a5fa;
+      border-radius: 4px;
+      color: #aebcd1;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    
+    .button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      margin-top: 8px;
+      width: 100%;
+      transition: all 0.3s;
+    }
+    
+    .button:hover {
+      background: #1d4ed8;
+    }
+    
+    .search-box {
+      background: #0f1729;
+      border: 1px solid #2a3548;
+      border-radius: 6px;
+      padding: 8px;
+      color: #e6eaf2;
+      width: 100%;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+    
+    .description-section {
+      margin-top: 20px;
+      padding: 15px;
+      background: rgba(96, 165, 255, 0.1);
+      border-left: 3px solid #60a5fa;
+      border-radius: 6px;
+    }
+    
+    .description-section h3 {
+      color: #60a5fa;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    .description-section p {
+      color: #aebcd1;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎮 ARC COMPANION - APP SCREENSHOTS</h1>
+    
+    <div class="screenshots">
+      
+      <!-- SCREEN 1: BLUEPRINTS TAB -->
+      <div class="screenshot">
+        <div class="screenshot-title">📦 Blueprints Tab</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <!-- Header -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 8px;">ARC COMPANION</div>
+              <div style="font-size: 11px; color: #7b8aa3; margin-bottom: 8px;">Learned: <span style="color: #e6eaf2; font-weight: bold;">24</span>/156 (15%)</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 15%;"></div>
+              </div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+              <div class="tab active">📦 Blueprints</div>
+              <div class="tab">🗺️ Maps</div>
+              <div class="tab">📖 Guides</div>
+            </div>
+            
+            <!-- Search -->
+            <input type="text" class="search-box" placeholder="Search blueprints...">
+            
+            <!-- Filter -->
+            <div style="font-size: 11px; color: #7b8aa3; margin-bottom: 10px;">
+              Filter: <span style="color: #60a5fa;">All Stations</span>
+            </div>
+            
+            <!-- Blueprint Cards -->
+            <div class="blueprint-card">
+              <div class="blueprint-name">Wolfpack Stock Module</div>
+              <div class="blueprint-meta">
+                <span class="rarity-badge rarity-epic">EPIC</span>
+                <span class="rarity-badge rarity-learned" style="background: #1e3a8a40; color: #60a5fa;">LEARNED</span>
+              </div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 5px;">Station: Launch Tower</div>
+              <div class="status-badge">✓ In Inventory</div>
+            </div>
+            
+            <div class="blueprint-card">
+              <div class="blueprint-name">Tempest Receiver Assembly</div>
+              <div class="blueprint-meta">
+                <span class="rarity-badge rarity-rare">RARE</span>
+                <span class="rarity-badge rarity-learned" style="background: #1e3a8a40; color: #60a5fa;">LEARNED</span>
+              </div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 5px;">Station: Buried City</div>
+              <div class="status-badge">✓ Crafted</div>
+            </div>
+            
+            <div class="blueprint-card">
+              <div class="blueprint-name">Snap Hook Grip</div>
+              <div class="blueprint-meta">
+                <span class="rarity-badge rarity-uncommon">UNCOMMON</span>
+              </div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 5px;">Station: Blue Gate</div>
+              <div style="color: #f87171; font-size: 11px; margin-top: 5px;">⚠ Not Found Yet</div>
+            </div>
+            
+            <div class="blueprint-card">
+              <div class="blueprint-name">Equalizer Scope Mount</div>
+              <div class="blueprint-meta">
+                <span class="rarity-badge rarity-epic">EPIC</span>
+              </div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 5px;">Station: Spaceport</div>
+              <div style="color: #f87171; font-size: 11px; margin-top: 5px;">⚠ Not Found Yet</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SCREEN 2: MAPS TAB -->
+      <div class="screenshot">
+        <div class="screenshot-title">🗺️ Maps Tab</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <!-- Header -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2;">MAP CONDITIONS</div>
+              <div style="font-size: 11px; color: #7b8aa3;">Real-time raid information</div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+              <div class="tab">📦 Blueprints</div>
+              <div class="tab active">🗺️ Maps</div>
+              <div class="tab">📖 Guides</div>
+            </div>
+            
+            <!-- Map Conditions -->
+            <div class="map-condition">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 5px;">⏰ Launch Tower</div>
+              <div style="color: #aebcd1; font-size: 12px;">Condition: <span style="color: #60a5fa;">Night Raid</span></div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 3px;">Available blueprints: Wolfpack, Tempest</div>
+              <div style="color: #f87171; font-size: 10px; margin-top: 3px;">⏱ Expires in: 47 min</div>
+            </div>
+            
+            <div class="map-condition">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 5px;">⏰ Buried City</div>
+              <div style="color: #aebcd1; font-size: 12px;">Condition: <span style="color: #93c5fd;">EM Storm</span></div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 3px;">Available blueprints: Energy Cannon</div>
+              <div style="color: #f87171; font-size: 10px; margin-top: 3px;">⏱ Expires in: 2h 15m</div>
+            </div>
+            
+            <div class="map-condition">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 5px;">⏰ Blue Gate</div>
+              <div style="color: #aebcd1; font-size: 12px;">Condition: <span style="color: #60a5fa;">Closed Gate</span></div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 3px;">Available blueprints: Snap Hook, Shield Core</div>
+              <div style="color: #f87171; font-size: 10px; margin-top: 3px;">⏱ Expires in: 1h 30m</div>
+            </div>
+            
+            <div class="map-condition">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 5px;">⏰ Spaceport</div>
+              <div style="color: #aebcd1; font-size: 12px;">Condition: <span style="color: #dc262680;">Hidden Bunker</span></div>
+              <div style="color: #7b8aa3; font-size: 11px; margin-top: 3px;">Available blueprints: Thermal Scope</div>
+              <div style="color: #f87171; font-size: 10px; margin-top: 3px;">⏱ Expires in: 3h 05m</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SCREEN 3: PROGRESS STATS -->
+      <div class="screenshot">
+        <div class="screenshot-title">📊 Progress & Stats</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <!-- Overall Progress -->
+            <div style="margin-bottom: 15px; padding: 10px; background: #131c2f; border-radius: 8px;">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 8px;">Blueprint Progress</div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 15%;"></div>
+              </div>
+              <div style="display: flex; justify-content: space-between; font-size: 12px; color: #aebcd1;">
+                <span>24 Learned</span>
+                <span>156 Total</span>
+                <span style="color: #e6eaf2; font-weight: bold;">15%</span>
+              </div>
+            </div>
+            
+            <!-- Inventory Stats -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 8px; font-size: 13px;">Inventory Stats</div>
+              
+              <div class="stat-item">
+                <span>In Inventory:</span>
+                <span class="stat-value">8</span>
+              </div>
+              <div class="stat-item">
+                <span>Crafted:</span>
+                <span class="stat-value">16</span>
+              </div>
+              <div class="stat-item">
+                <span>Unknown:</span>
+                <span class="stat-value">132</span>
+              </div>
+            </div>
+            
+            <!-- Rarity Breakdown -->
+            <div style="background: #131c2f; border-radius: 8px; padding: 10px; margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2; margin-bottom: 8px; font-size: 13px;">Learned by Rarity</div>
+              
+              <div class="stat-item">
+                <span>
+                  <span class="rarity-badge rarity-common">COMMON</span>
+                </span>
+                <span class="stat-value">8</span>
+              </div>
+              <div class="stat-item">
+                <span>
+                  <span class="rarity-badge rarity-uncommon">UNCOMMON</span>
+                </span>
+                <span class="stat-value">6</span>
+              </div>
+              <div class="stat-item">
+                <span>
+                  <span class="rarity-badge rarity-rare">RARE</span>
+                </span>
+                <span class="stat-value">7</span>
+              </div>
+              <div class="stat-item">
+                <span>
+                  <span class="rarity-badge rarity-epic">EPIC</span>
+                </span>
+                <span class="stat-value">3</span>
+              </div>
+            </div>
+            
+            <!-- Actions -->
+            <button class="button">📥 Load from Steam</button>
+            <button class="button" style="background: #6d28d9; margin-top: 8px;">🔄 Reset Progress</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SCREEN 4: GUIDES TAB -->
+      <div class="screenshot">
+        <div class="screenshot-title">📖 Guides Tab</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <!-- Header -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2;">COMPANION GUIDES</div>
+              <div style="font-size: 11px; color: #7b8aa3;">Pro tips & strategies</div>
+            </div>
+            
+            <!-- Tabs -->
+            <div class="tabs">
+              <div class="tab">📦 Blueprints</div>
+              <div class="tab">🗺️ Maps</div>
+              <div class="tab active">📖 Guides</div>
+            </div>
+            
+            <!-- Guide Sections -->
+            <div style="margin-bottom: 12px; padding: 10px; background: #131c2f; border-radius: 8px; border-left: 3px solid #60a5fa;">
+              <div style="font-weight: bold; color: #60a5fa; font-size: 12px; margin-bottom: 6px;">🎯 Container Types</div>
+              <div style="color: #aebcd1; font-size: 11px; line-height: 1.5;">
+                <div>• <span style="font-weight: bold;">Weapon cases:</span> 3× higher blueprint rate</div>
+                <div>• <span style="font-weight: bold;">Raider caches:</span> Consistent chance</div>
+                <div>• <span style="font-weight: bold;">Black boxes:</span> High blueprint rate</div>
+                <div>• <span style="font-weight: bold;">Med duffels:</span> Medical blueprints</div>
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 12px; padding: 10px; background: #131c2f; border-radius: 8px; border-left: 3px solid #60a5fa;">
+              <div style="font-weight: bold; color: #60a5fa; font-size: 12px; margin-bottom: 6px;">⏰ Map Conditions</div>
+              <div style="color: #aebcd1; font-size: 11px; line-height: 1.5;">
+                Target-specific blueprints only drop under specific conditions: Night Raid, EM Storm, Closed Gate, etc. Check event timers before loading in.
+              </div>
+            </div>
+            
+            <div style="margin-bottom: 12px; padding: 10px; background: #131c2f; border-radius: 8px; border-left: 3px solid #60a5fa;">
+              <div style="font-weight: bold; color: #60a5fa; font-size: 12px; margin-bottom: 6px;">🚀 Early Priority</div>
+              <div style="color: #aebcd1; font-size: 11px; line-height: 1.5;">
+                <div>• Burletta — solid early weapon</div>
+                <div>• Smoke Grenade — escape tool</div>
+                <div>• Heavy Gun Parts — unlocks upgrades</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SCREEN 5: BLUEPRINT DETAIL -->
+      <div class="screenshot">
+        <div class="screenshot-title">📋 Blueprint Details</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content">
+            <!-- Blueprint Header -->
+            <div style="background: #131c2f; padding: 12px; border-radius: 8px; margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #e6eaf2; font-size: 14px; margin-bottom: 8px;">Wolfpack Stock Module</div>
+              
+              <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+                <span class="rarity-badge rarity-epic">EPIC</span>
+                <span class="status-badge">✓ LEARNED</span>
+              </div>
+              
+              <div style="color: #7b8aa3; font-size: 12px; line-height: 1.6;">
+                <div style="margin-bottom: 6px;">
+                  <span style="color: #aebcd1;">📍 Station:</span> Launch Tower
+                </div>
+                <div style="margin-bottom: 6px;">
+                  <span style="color: #aebcd1;">📊 Effect:</span> Improves aim stability
+                </div>
+                <div style="margin-bottom: 6px;">
+                  <span style="color: #aebcd1;">🎯 Focus:</span> Weapon customization
+                </div>
+              </div>
+            </div>
+            
+            <!-- Description -->
+            <div class="description-section">
+              <h3>📜 Blueprint Description</h3>
+              <p>A premium stabilization module designed by raiders to enhance weapon ergonomics. Reduces recoil by 12% and improves handling speed by 8%. Crucial for medium-range engagements.</p>
+            </div>
+            
+            <!-- Farming Info -->
+            <div class="description-section" style="margin-top: 10px;">
+              <h3>⚙️ How to Obtain</h3>
+              <p>Found in Weapon Cases at Launch Tower during Night Raid conditions. Farm at the northern armory cache for highest drop rate (approx 1 in 8 raids). Always appears in Raider Caches.</p>
+            </div>
+            
+            <!-- Craft Info -->
+            <div class="description-section" style="margin-top: 10px;">
+              <h3>🔨 Crafting</h3>
+              <p>Requires: 3× Heavy Gun Parts, 2× Precision Springs, 1× Wolfpack Token</p>
+            </div>
+            
+            <!-- Action Buttons -->
+            <button class="button" style="margin-top: 12px;">✓ Mark as Learned</button>
+            <button class="button" style="background: #6d28d9; margin-top: 8px;">📌 Pin Blueprint</button>
+          </div>
+        </div>
+      </div>
+      
+      <!-- SCREEN 6: DARK MODE TOGGLE -->
+      <div class="screenshot">
+        <div class="screenshot-title">🌙 Dark/Light Mode Toggle</div>
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-content" style="background: #f1f5f9; color: #0f172a;">
+            <!-- Header (Light Mode) -->
+            <div style="margin-bottom: 12px;">
+              <div style="font-weight: bold; color: #0f172a; margin-bottom: 8px;">ARC COMPANION</div>
+              <div style="font-size: 11px; color: #334155; margin-bottom: 8px;">Learned: <span style="color: #0f172a; font-weight: bold;">24</span>/156 (15%)</div>
+              <div class="progress-bar" style="background: #e2e8f0;">
+                <div class="progress-fill" style="width: 15%; background: linear-gradient(90deg, #2563eb, #dc2626);"></div>
+              </div>
+            </div>
+            
+            <!-- Tabs (Light Mode) -->
+            <div class="tabs" style="border-bottom: 1px solid #cbd5e1;">
+              <div class="tab" style="background: #ffffff; border-color: #cbd5e1; color: #2563eb; active: true;">📦 Blueprints</div>
+              <div class="tab" style="background: #f8fafc; border-color: #cbd5e1; color: #334155;">🗺️ Maps</div>
+              <div class="tab" style="background: #f8fafc; border-color: #cbd5e1; color: #334155;">📖 Guides</div>
+            </div>
+            
+            <!-- Card (Light Mode) -->
+            <div class="blueprint-card" style="background: #ffffff; border-color: #cbd5e1;">
+              <div class="blueprint-name" style="color: #0f172a;">Wolfpack Stock</div>
+              <div class="blueprint-meta" style="color: #475569;">
+                <span class="rarity-badge rarity-epic">EPIC</span>
+              </div>
+              <div style="color: #334155; font-size: 11px; margin-top: 5px;">Station: Launch Tower</div>
+            </div>
+            
+            <!-- Settings Row -->
+            <div style="margin-top: 12px; padding: 10px; background: #f8fafc; border-radius: 6px; border: 1px solid #e2e8f0;">
+              <div style="display: flex; justify-content: space-between; align-items: center; color: #0f172a; font-size: 12px;">
+                <span>🌙 Dark Mode</span>
+                <div style="width: 40px; height: 20px; background: #cbd5e1; border-radius: 10px; position: relative;">
+                  <div style="width: 16px; height: 16px; background: #ffffff; border-radius: 50%; position: absolute; right: 2px; top: 2px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+    
+    <!-- BOTTOM DESCRIPTION -->
+    <div class="description-section" style="margin-top: 30px;">
+      <h3>💡 ARC Companion App Features</h3>
+      <p><strong>Complete Blueprint Tracker:</strong> Track 156+ ARC Raiders blueprints with real-time status (learned, in inventory, unknown). Filter by rarity, station, or search by name.</p>
+      
+      <p style="margin-top: 10px;"><strong>Map Conditions:</strong> Real-time display of raid conditions on all maps. Target-specific blueprints only drop under certain conditions (Night Raid, EM Storm, Closed Gate, Hidden Bunker, Harvester, Stella-bound, Quest).</p>
+      
+      <p style="margin-top: 10px;"><strong>Steam Integration:</strong> Load blueprint data directly from your Steam account. Automatic sync of learned blueprints and inventory status.</p>
+      
+      <p style="margin-top: 10px;"><strong>Progress Tracking:</strong> Visual progress bars showing completion percentage. Breakdown by rarity (Common, Uncommon, Rare, Epic, Legendary). Track inventory vs learned blueprints.</p>
+      
+      <p style="margin-top: 10px;"><strong>Comprehensive Guides:</strong> Container types with drop rates, map conditions, farming strategies, early-game priority list, and pro tips.</p>
+      
+      <p style="margin-top: 10px;"><strong>Dark & Light Themes:</strong> Toggleable themes with hand-tuned color palettes. Dark mode optimized for night gaming sessions. Light mode for daytime use.</p>
+      
+      <p style="margin-top: 10px;"><strong>Persistent Storage:</strong> Local storage saves all progress. Data persists across sessions. Manual reset option available.</p>
+      
+      <p style="margin-top: 10px;"><strong>Responsive Design:</strong> Mobile-first design works on phones, tablets, and desktop. Clean, minimal UI with focus on readability.</p>
+    </div>
+  </div>
+</body>
+</html>
