@@ -6,4 +6,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react()],
   base: "/Arc-Raiders-Companion/",
+
+export default defineConfig({
+  base: '/Arc-Raiders-Companion/',
+  plugins: [react()],
 });
+
