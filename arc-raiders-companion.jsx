@@ -452,14 +452,14 @@ const FONTS = {
 // ---------------------------------------------------------------------------
 async function loadStatuses() {
   try {
-    const result = await window.storage.get(STORAGE_KEY);
-    if (result && result.value) return JSON.parse(result.value);
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
   } catch (_) {}
   return {};
 }
 
 async function saveStatuses(map) {
-  try { await window.storage.set(STORAGE_KEY, JSON.stringify(map)); }
+  try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(map)); }
   catch (e) { console.error("Storage save failed", e); }
 }
 
@@ -529,6 +529,11 @@ const fmtNum = (n) => {
 // Steam player count
 // ---------------------------------------------------------------------------
 async function fetchSteamPlayers(signal) {
+  // Note: Steam's API does not send CORS headers, so this direct browser
+  // fetch will typically fail once deployed outside a proxying sandbox.
+  // It degrades gracefully to { count: null, error: true } — consider
+  // routing this through your own small serverless proxy if you want
+  // this feature to work reliably on the live demo.
   try {
     const r = await fetch(
       `https://api.steampowered.com/ISteamUserStats/GetNumberOfCurrentPlayers/v1/?appid=${ARC_STEAM_APPID}`,
@@ -541,39 +546,11 @@ async function fetchSteamPlayers(signal) {
     }
   } catch (_) {}
 
-  try {
-    const r = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      signal,
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{
-          role: "user",
-          content:
-            "Search Steam Charts or SteamDB for the CURRENT live concurrent player count for ARC Raiders (Steam app id 1808500). " +
-            "Reply with ONLY the integer — no commas, no words, no explanation. Example: 142503"
-        }],
-        tools: [{ type: "web_search_20250305", name: "web_search" }],
-      })
-    });
-    if (r.ok) {
-      const data = await r.json();
-      const text = (data.content || [])
-        .filter((b) => b.type === "text")
-        .map((b) => b.text)
-        .join(" ");
-      const match = text.match(/\b(\d{3,})\b/);
-      if (match) return { count: parseInt(match[1], 10) };
-    }
-  } catch (_) {}
-
   return { count: null, error: true };
 }
 
 // ---------------------------------------------------------------------------
-// Theme provider — system default, override stored in window.storage
+// Theme provider — system default, override stored in localStorage
 // ---------------------------------------------------------------------------
 function ThemeProvider({ children }) {
   // null = follow system. "light" / "dark" = explicit override.
@@ -585,12 +562,10 @@ function ThemeProvider({ children }) {
 
   // Load saved override on mount
   useEffect(() => {
-    (async () => {
-      try {
-        const r = await window.storage.get(THEME_KEY);
-        if (r && (r.value === "light" || r.value === "dark")) setOverride(r.value);
-      } catch (_) {}
-    })();
+    try {
+      const v = window.localStorage.getItem(THEME_KEY);
+      if (v === "light" || v === "dark") setOverride(v);
+    } catch (_) {}
   }, []);
 
   // Listen to system changes — only applies when no override is set
@@ -608,7 +583,7 @@ function ThemeProvider({ children }) {
   const toggle = () => {
     const next = isDark ? "light" : "dark";
     setOverride(next);
-    try { window.storage.set(THEME_KEY, next); } catch (_) {}
+    try { window.localStorage.setItem(THEME_KEY, next); } catch (_) {}
   };
 
   const value = useMemo(() => ({ T, isDark, toggle }), [T, isDark]);
