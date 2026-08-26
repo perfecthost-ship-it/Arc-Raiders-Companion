@@ -10,8 +10,6 @@ A blueprint tracking and reference companion for **ARC Raiders**, built two ways
 
 A React single-page app for tracking blueprints, browsing maps, and referencing core game knowledge.
 
-**[Live demo →](https://perfecthost-ship-it.github.io/Arc-Raiders-Companion/)**
-
 ### Features
 
 - **Blueprints tab** — Browse the blueprint list, mark each one as *Find it* / *In inventory* / *Learned*, and filter/search. Progress is saved locally in your browser.
